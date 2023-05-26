@@ -15,6 +15,9 @@ populateTextarea();
 refs.form.addEventListener("input", throttle(onTextareaInput, 500));
 
 refs.form.addEventListener("submit", (e) => {
+  if (refs.textarea.value === "" || refs.input.value === "") {
+      return alert('всі поля повинні бути заповнені')
+    }
   e.preventDefault();
   e.currentTarget.reset();
   const objData = JSON.parse(localStorage.getItem(STORAGE_KEY));
@@ -36,11 +39,3 @@ function populateTextarea() {
   refs.textarea.value = savedMessage["message"] || "";
   refs.input.value = savedMessage["email"] || "";
 }
-
-// const elements = {
-//   email: useremail.value,
-//   pass: password.value
-// }
-// if (useremail.value === '' || password.value === '') {
-//   return alert('всі поля повинні бути заповнені')
-// }
