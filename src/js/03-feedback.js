@@ -14,15 +14,17 @@ populateTextarea();
 
 refs.form.addEventListener("input", throttle(onTextareaInput, 500));
 
-refs.form.addEventListener("submit", (e) => {
+function onSubmit(e) {
+  e.preventDefault();
   if (refs.textarea.value === "" || refs.input.value === "") {
       return alert('всі поля повинні бути заповнені')
     }
-  e.preventDefault();
   e.currentTarget.reset();
   const objData = JSON.parse(localStorage.getItem(STORAGE_KEY));
   localStorage.removeItem(STORAGE_KEY);
-});
+}
+
+refs.form.addEventListener("submit", onSubmit);
 
 function onTextareaInput(e) {
   formData[e.target.name] = e.target.value;
